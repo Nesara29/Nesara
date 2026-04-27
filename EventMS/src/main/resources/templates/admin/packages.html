@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h4 class="h4 mt-4 ml-3">Packages</h4>
+     <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <a class="btn btn-md btn-success mr-2" style="font-size: 12px;" href="/admin/packageadd"><i class="mdi mdi-buffer mr-2"></i> Add New Package</a>
+        </div>
+    </div>
+</div>
+
+ 
+        <div class="col-md-12">
+            <table id="example" class="table table-striped table-hover table-bordered table-sm" cellspacing="0" width="100%" style="background: white;padding: 5px">
+
+                <thead>
+                    <tr>
+                    <th></th>
+                        <th>Category</th> 
+                        <th>Name</th> 
+                        <th>Price(INR)</th> 
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+              
+                <tbody>
+                    
+                    <tr th:each="f:${subcategories}" th:class="${f.status==1?'active':'inactive'}"> 
+                    
+                          <td class="special">
+                          
+                             <img th:src="${'/home/viewpackageimg/'+f.id}" alt="" class="img-fluid rounded-circle" style="width: 34px;height: 34px;"></td> 
+                          <td class="special" th:text="${f.category}"></td>
+                        <td class="special" th:text="${f.name+(f.status==1?'':' (inactive)')}"></td> 
+                          <td class="special" th:text="${f.price}"></td>
+                        <td>
+                              <a th:href="${'/admin/packageedit/'+f.id}" class="btn btn-info btn-sm active"><i class="mdi mdi-account-edit"></i></a>
+                
+                <a th:href="${'/home/packagedetail/'+f.id}" target="_blank" class="btn btn-warning btn-sm active"><i class="mdi mdi-eye"></i></a>
+        
+                        
+                        </td>
+</tr>
+</tbody>
+</table>
+ 
+</div>
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+     <script>
+  
+    $(document).ready(function() {
+        $('#example').DataTable(); 
+    });
+
+    
+    
+</script>
+
+</body>
+</html>

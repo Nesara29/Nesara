@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="client/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="client/base :: header">
+</th:block>
+
+<div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card b-0">
+                    <h3 class="heading">Request a Booking</h3>
+                    <p class="desc">Fill out the form<br>to start processing your booking today!</p>
+                     <div class="msg msg-success text-success d-none"></div>
+                     <div class="msg msg-error text-danger d-none"></div>
+                    <ul id="progressbar" class="text-center">
+                        <li class="active step0" id="step1"></li>
+                        <li class="step0" id="step2"></li>
+                        <li class="step0" id="step3"></li>
+                        <li class="step0" id="step4"></li>
+                        <li class="step0" id="step5"></li>
+                        <li class="step0" id="step6"></li>  
+                    </ul>
+                    <fieldset class="show" data-step="1">
+                        <div class="form-card">
+                            <h5 class="sub-heading">Select Service</h5>
+                            <div class="row px-1 radio-group justify-content-center services">
+                            
+                                <div class="card-block text-center radio bg-spring" th:data-id="${c.id}" th:each="c:${categories}">
+                                    
+                                    <p class="sub-desc" th:text="${c.name}"></p>
+                                </div>
+                                 
+                            </div> 
+                            <button  id="next1" class="btn-block btn-primary mt-3 mb-1 next">NEXT<span class="mdi mdi-arrow-right"></span></button>
+                        </div>
+                    </fieldset>
+                    <fieldset  data-step="2">
+                        <div class="form-card">
+                            <h5 class="sub-heading">Select Package</h5>
+                            <div class="row px-1 radio-group justify-content-center packages">
+                            
+                                
+                            </div>
+                            <button class="btn-block btn-primary mt-3 mb-1 next mt-4">NEXT<span class="mdi mdi-arrow-right"></span></button>
+                            <button  class="btn-block btn-secondary mt-3 mb-1 prev"><span class="mdi mdi-arrow-left"></span>PREVIOUS</button>
+                           
+                        </div>
+                    </fieldset>
+                      <fieldset data-step="3">
+                        <div class="form-card">
+                        <div class="features"> 
+                        </div>
+                          <button class="btn-block btn-primary mt-3 mb-1 next mt-4">NEXT<span class="mdi mdi-arrow-right"></span></button>
+                          <button  class="btn-block btn-secondary mt-3 mb-1 prev"><span class="mdi mdi-arrow-left"></span>PREVIOUS</button>
+                  </div>
+                    </fieldset>
+                      <fieldset data-step="4">
+                        <div class="form-card"> 
+                           <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" 
+                            class="form-control" 
+                            id="title"  
+                            placeholder="Enter   title" required>
+                        </div>
+                           <div class="form-group"> 
+                     <label for="fromdate">From Date</label>
+                            <input type="date" class="form-control"
+                                   name="fromdate"   id="fromdate"
+                                   placeholder="Event From Date" required> 
+                    </div>
+                     <div class="form-group"> 
+                     <label for="todate">To Date</label>
+                            <input type="date" class="form-control"
+                                   name="todate"   id="todate"
+                                   placeholder="Event To Date" required> 
+                    </div>
+                          <button class="btn-block btn-primary mt-3 mb-1 next mt-4">NEXT<span class="mdi mdi-arrow-right"></span></button>
+                          <button  class="btn-block btn-secondary mt-3 mb-1 prev"><span class="mdi mdi-arrow-left"></span>PREVIOUS</button>
+                      </div>
+                    </fieldset>
+                                          <fieldset data-step="5">
+                        <div class="form-card"> 
+                           <div class="form-group">
+                            <label for="title">Details</label>
+                            <textarea class="form-control" id="details" name="details" style="height:300px;" required></textarea>
+                        </div> 
+                          <button class="btn-block btn-primary mt-3 mb-1 next mt-4">NEXT<span class="mdi mdi-arrow-right"></span></button>
+                          <button  class="btn-block btn-secondary mt-3 mb-1 prev"><span class="mdi mdi-arrow-left"></span>PREVIOUS</button>
+                      </div>
+                    </fieldset> 
+                    <fieldset data-step="6">
+                        <div class="form-card">
+                            <h5 class="sub-heading mb-4 h2 text-success">Success!</h5>
+                            <p class="message h4">Thank You for choosing our Service.<br>You will be contacted to your Email ID / Contact Number for next process.</p>
+                             
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+<th:block  th:replace="client/base :: footer">
+</th:block>
+     <style>
+    .card {
+    background-color: #FFF;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    z-index: 0
+}
+ 
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey;
+    padding-left: 0px;
+    
+}
+
+#progressbar .active {
+    color: #673AB7
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 14%;
+    float: left;
+    position: relative;
+    font-weight: 400
+}
+
+#progressbar .step0:before {
+    content: ""
+}
+
+#progressbar li:before {
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    background: #E0E0E0;
+    border-radius: 50%;
+    margin: auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 10px;
+    background: #E0E0E0;
+    position: absolute;
+    left: 0;
+    top: 17px;
+    z-index: -1
+}
+
+#progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px
+}
+
+#progressbar li:first-child:after {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #F9A825
+}
+
+ 
+
+fieldset.show {
+    display: block
+}
+
+fieldset {
+    display: none
+}
+
+.radio {
+    display: inline-block;
+    border-radius: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 900; 
+    font-size:30px;
+}
+
+.radio:hover {
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)
+}
+
+.radio.selected {
+    border: 3px solid #000;
+    box-shadow: 0px 8px 16px 0px #EEEEEE;
+    color: #29B6F6 !important;
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    -o-filter: grayscale(0%);
+    -ms-filter: grayscale(0%);
+    filter: grayscale(0%)
+}
+
+.card-block {
+    border: 1px solid #CFD8DC;
+    width: 45%;
+    margin: 2.5%;
+    padding: 20px 25px 15px 25px
+}
+
+@media screen and (max-width: 768px) {
+    .card-block {
+        padding: 20px 20px 0px 20px;
+        height: 250px
+    }
+}
+
+ 
+ 
+.btn-block {
+    border-radius: 5px;
+    height: 50px;
+    font-weight: 500;
+    cursor: pointer
+}
+
+.bg-spring {
+    background: -webkit-linear-gradient(70deg, #fff810  30%, rgba(0,0,0,0) 30%), -webkit-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+    background: -o-linear-gradient(70deg, #fff810  30%, rgba(0,0,0,0) 30%), -o-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+    background: -moz-linear-gradient(70deg, #fff810  30%, rgba(0,0,0,0) 30%), -moz-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+    background: linear-gradient(70deg, #fff810  30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+}
+ .bg-news {
+  background: -webkit-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  background: -o-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  background: -moz-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  background: linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+}
+    </style>
+    
+    <script>
+     
+    var pkgtpl='<div class="bg-white col-8 mx-auto"><h5 class="h5 mb-5 pl-3 pr-3 pt-3 text-uppercase"><span class="text-capitalize float-left">{{name}} Package </span><span class="text-capitalize float-right">Price: <span class=amount>{{price}}</span></span></h5><img alt=""src=/home/viewpackageimg/{{id}} class="w-100"><ul class=list-group><li class="active align-items-start bg-danger flex-column list-group-item list-group-item-action"><div class="d-flex justify-content-between w-100"><h5 class="mb-1 pb-2 pt-2">FUNCTIONS AND SERVICES</h5></div></li>{{features}}</div>';
+    var ftrstpl='<li class="align-items-start flex-column list-group-item list-group-item-action"><div class="d-flex justify-content-between w-100"><h5 class=mb-1><i class="mdi mdi-check mr-3"></i>{{name}}</h5></div><p class="mb-1 ml-3 text-capitalize">{{description}}</p></li>';
+    $(document).ready(function () {
+
+        var current_fs, next_fs, previous_fs;
+
+        $(".next").click(function () {
+        	showsuccess('');
+            current_fs = $(this).parent().parent();
+            next_fs = $(this).parent().parent().next();
+            
+            switch(parseInt($(current_fs).attr("data-step")))
+            {
+            case 1:
+            	if($('.services .radio.selected').length==1)
+            	{
+               		var id=$('.services .radio.selected').attr('data-id');
+               		$.ajax({
+                        type: "POST",
+                        url: "/client/getPackages/"+id,   
+              		    dataType: "json",
+              		  cache: false,
+              		  contentType: false,
+              		  processData: false,
+                        success: function(data)
+                        { 
+                        	$(".packages").html('');
+                        	var strhtml="";
+                        	var packs=data.packages;
+                        	for(var i=0;i<packs.length;i++)
+                        		{
+                        		  strhtml+='<div class="card-block text-center radio bg-news" data-id="'+packs[i].id+'"><p class="sub-desc">'+packs[i].name+' - <span class="amount">'+packs[i].price+'</span></p></div>';
+                        		}
+                        	$(".packages").html(strhtml);
+                        	   addRadioEvent('.packages');
+                        } 
+                        });
+            	}
+            	else
+            		{
+            		  showerror("Select a Service!");
+            		  return;
+            		}
+            	break;
+            case 2:
+            	if($('.packages .radio.selected').length==1)
+            	{
+               		var id=$('.packages .radio.selected').attr('data-id');
+               		$.ajax({
+                        type: "POST",
+                        url: "/client/getPackage/"+id,   
+              		    dataType: "json",
+              		  cache: false,
+              		  contentType: false,
+              		  processData: false,
+                        success: function(data)
+                        { 
+        					$(".features").html('');
+                        	var strhtml=pkgtpl.replace("{{id}}",data.package.id);
+                        	 strhtml=strhtml.replace("{{name}}",data.package.name+" - "+data.category.name);
+                         	 strhtml=strhtml.replace("{{price}}",data.package.price);
+                         	features=data.features;
+                         	var strhtml1="";
+                        	for(var i=0;i<features.length;i++)
+                        		{
+                        		   var strhtml2= ftrstpl.replace("{{name}}",features[i].name);
+                        		   strhtml2= strhtml2.replace("{{description}}",features[i].description);
+                        		   strhtml1+=strhtml2;
+                        		}
+                        	strhtml=strhtml.replace("{{features}}",strhtml1);
+                        	$(".features").html(strhtml)
+                        } 
+                        });
+            	}
+            	else
+            		{
+            		  showerror("Select a Package!");
+            		  return;
+            		}
+            	
+            	
+            	break;
+            case 3:
+            	break;
+            case 4:
+            	if(!$("#title").val().trim() || !$("#fromdate").val().trim() || !$("#todate").val().trim())
+        	{
+      		  showerror("Please fill the below information!");
+      		  return;
+      		}
+            	break;
+            case 5:
+            	if(!$("#details").val().trim())
+            	{
+          		  showerror("Please fill the below information!");
+          		  return;
+          		}
+            	 
+            	var formData = new FormData();
+            	formData.append("category",  $('.services .radio.selected').attr('data-id')); 
+            	formData.append("package",  $('.packages .radio.selected').attr('data-id')); 
+            	formData.append("title",  $('#title').val());
+            	formData.append("fromdate",  $('#fromdate').val());
+            	formData.append("todate",  $('#todate').val());
+            	formData.append("details",  $('#details').val());
+            	$.ajax({
+                    type: "POST",
+                    url: "/client/createbooking" ,   
+          		    dataType: "json",
+          		    data:formData,
+          		  cache: false,
+          		  contentType: false,
+          		  processData: false,
+                    success: function(data)
+                    { 
+    					 if(data.success==1)
+    						{
+    						 
+    						 showsuccess(data.message);
+    						 movenext(current_fs,next_fs);
+    						}
+    					 else
+    						 {
+    						 showerror(data.message);
+    						 }
+                    } 
+                    });
+            	  return;
+            	break;
+             
+            }
+
+
+            movenext(current_fs,next_fs);
+            
+        });
+
+        function movenext(current_fs,next_fs)
+        {
+            $(current_fs).removeClass("show");
+            $(next_fs).addClass("show");
+ 
+            $("#progressbar li#step"+$(next_fs).attr("data-step")).addClass("active");
+
+            current_fs.animate({}, {
+                step: function () {
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+
+                    next_fs.css({
+                        'display': 'block'
+                    });
+                }
+            });
+            
+        }
+        
+        $(".prev").click(function () {
+             
+            
+            current_fs = $(this).parent().parent();
+            previous_fs = $(this).parent().parent().prev();
+
+            $(current_fs).removeClass("show");
+            $(previous_fs).addClass("show");
+
+            $("#progressbar li#step"+$(current_fs).attr("data-step")).removeClass("active");
+
+            current_fs.animate({}, {
+                step: function () {
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+
+                    previous_fs.css({
+                        'display': 'block'
+                    });
+                }
+            });
+        });
+        addRadioEvent('.services');
+
+    });
+
+     function addRadioEvent(ele)
+     {
+    	  $(ele).find('.radio').click(function () { 
+    		  $(ele).find('.radio').removeClass('selected');
+              $(this).addClass('selected');
+          });
+     }
+    
+     function showsuccess(msg)
+     {
+    	 $(".msg").addClass("d-none").html(''); 
+    	 $(".msg.msg-success").removeClass("d-none").html(msg);
+     }
+     function showerror(msg)
+     {
+    	 $(".msg").addClass("d-none").html(''); 
+    	 $(".msg.msg-error").removeClass("d-none").html(msg);
+     }
+    
+    </script>
+</body>
+</html>

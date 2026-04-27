@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+   <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-12 pl-3 pb-3 box-shadow mt-4">
+               
+                <form class="ajaxfrm" action="/admin/posts" data-return="/admin/blogevents" method="post" enctype="multipart/form-data">
+                
+                  <input type="hidden" name="action" value="add">
+                     
+                    <h4 class="h4 mt-4 pb-2" style="border-bottom: 1px solid #dee2e6!important;">New Article 
+
+                        <a href="/admin/blogevents" class="btn btn-sm btn-danger float-right" style="font-size: 12px;"><i class="mdi mdi-close-circle mr-2"></i> Cancel</a>
+
+                        <button type="submit" name="submit" class="btn btn-sm btn-success float-right mr-2" style="font-size: 12px;position: fixed;right: 10%;"><i class="mdi mdi-account-plus mr-2"></i> Save article</button>
+
+                    </h4>
+                      
+                        <div class="form-group">
+                            <label for="booking_id">Package:</label>
+                            <select class="custom-select form-control" id="package" name="package">
+                                <option value=0>NA</option>
+                                <option th:each="c:${packages}" th:value="${c.id}" th:text="${c.name+' - '+c.category}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="booking">Related Booking:</label>
+                            <select class="custom-select form-control" id="booking" name="booking">
+                                <option value=0>NA</option>
+                                <option th:each="c:${bookings}" th:value="${c.id}" th:text="${c.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" 
+                            class="form-control" 
+                            id="title"  
+                            placeholder="Enter article title" required>
+                        </div>
+
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Enter content" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" name="img" id='img' required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="date" class="form-control"
+                                   name="edate"   id="edate"
+                                   placeholder="Event Date" required>
+                           
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <select class="custom-select form-control" id="city" name="city" required>
+                                  <option th:each="c:${cities}" th:value="${c.id}" th:text="${c.name}"></option>
+                            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Status:</label>
+                        <select name="status" id="status" class="form-control" required>
+                            <option value="0">Draft</option>
+                            <option value="1">Publish</option>
+                        </select>
+                    </div>
+                    <div class="msg msg-success text-success d-none"></div>
+                            <div class="msg msg-error text-danger d-none"></div>
+                </form><!-- end of input form -->
+            </div>
+            
+        </div>
+    </div>
+
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+ <script>
+  
+    $(document).ready(function() { 
+        
+        $('#img').change(function(){
+     	   if (this.files && this.files[0]) {
+     	        var reader = new FileReader();
+                if(this.files[0].size>512000) 
+                	{
+                	this.files=null;
+                	 $('#img').val('');
+                	alert("File size should be below 500kb");
+     	   }
+     	   }
+     	   
+       });
+    });
+
+    
+    
+</script>
+
+</body>
+</html>

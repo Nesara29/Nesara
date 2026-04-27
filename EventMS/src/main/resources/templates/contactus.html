@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="base :: header">
+</th:block>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-center mb-3">CONTACT US</h3>
+            <div class="bg-white p-4">
+                <div class="contact-information">
+                    <h5>LANDMARKET</h5>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table table-sm" style="font-size: 12px;">
+                                <tr>
+                                    <td>Big Day Planners</td>
+                                    <td><i class="mdi mdi-deskphone mr-3"></i> 999 (999) 999</td>
+                                </tr>
+                                <tr>
+                                    <td>6th Floor, Valencia City</td>
+                                    <td><i class="mdi mdi-phone mr-3"></i> +91 99896722351</td>
+                                </tr>
+                                <tr>
+                                    <td>Street P-4 Poblacion 88825</td>
+                                    <td><i class="mdi mdi-email mr-3"></i> contactemail@gmail.com</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center mt-3">
+                                <i class="mdi mdi-map-marker" style="font-size: 110px;color: #22ADB5;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white mt-3 pt-1 pl-4 pb-3">
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <form action="/home/savecontactus" class="ajaxfrm" method="post" style="font-size: 12px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12 mb-1">
+                                            <label for="contact_person">Name</label>
+                                            <input type="text" class="form-control" name="name" placeholder="Enter contact person">
+                                        </div>
+                                        <div class="form-group col-md-12 mb-1">
+                                            <label for="contact_email">Email</label>
+                                            <input type="email" class="form-control" name="email" placeholder="Enter email">
+                                        </div>
+                                        <div class="form-group col-md-12 mb-1">
+                                            <label for="contact_phone">Mobile</label>
+                                            <input type="text" class="form-control" name="mobile" placeholder="Enter mobile phone">
+                                        </div>
+                                        <div class="form-group col-md-12 mb-1">
+                                            <label for="contact_message">Message</label>
+                                            <textarea type="text" class="form-control"
+                                                      style="resize: none;" rows="8"
+                                                      name="message" placeholder="Enter message"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pr-2">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.804581750715!2d125.08993251421961!3d7.915471407613357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32ff1a2d27bfc2c5%3A0x49f6694edf036a5a!2sAMA+Computer+Learning+Center!5e0!3m2!1sen!2sph!4v1518944564341" width="95%" height="395" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm rounded-0" style="font-size: 12px;margin-top: 10px;background: #22adb5;border: 0;">Send Message</button>
+                        
+                         <div class="msg msg-success text-success d-none"></div>
+                            <div class="msg msg-error text-danger d-none"></div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<th:block  th:replace="base :: footer">
+</th:block>
+</body>
+</html>

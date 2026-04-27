@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Administrator Login Your Account</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/signin.css" rel="stylesheet">
+    <style>
+        body {
+            background: url("/assets/images/admin/bgw.jpg");
+            /* background-color: black; */
+            background-size: 100%;
+        }
+        
+        .form-signin {
+            background: rgba(255, 255,255, 0.4);
+        }
+    </style>
+</head>
+
+<body class="text-center">
+<form class="form-signin" action="/home/uloginauth" method="post">
+    <a href="/"><img class="mb-4" src="/assets/images/logo/WPMSlogo.png" width="190" ></a>
+    <h5 class="h5 mb-3 font-weight-normal" style="color:#222">Login As Administrator</h5>
+    
+     <div class="w-100">
+           <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Username or Password</div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success">You have been logged out.</div>
+            </div> 
+            </div>
+    
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="username" name="username" class="form-control" placeholder="Email Address" required autofocus>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+
+    <button class="btn btn-md btn-danger btn-block" type="submit" name="login">Log In</button>
+    <p class="mt-5 mb-3 text-muted">&copy;2025</p>
+</form>
+<script src="/assets/js/admin/jquery-3.2.1.slim.min.js"></script>
+<script src="/assets/js/admin/jquery.min.js"></script>
+<script src="/assets/js/admin/popper.min.js"></script>
+<script src="/assets/js/admin/bootstrap.min.js"></script>
+<script>
+    $('.your-checkbox').prop('indeterminate', true);
+</script>
+</body>
+</html>

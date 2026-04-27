@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h4 class="h4 mt-4 ml-3">Packages Features</h4>
+     <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <a class="btn btn-md btn-success mr-2" style="font-size: 12px;"  onclick="addpopup()"><i class="mdi mdi-buffer mr-2"></i> Add New Feature</a>
+        </div>
+    </div>
+</div>
+
+ 
+        <div class="col-md-12">
+            <table id="listtab" class="table table-striped table-hover table-bordered table-sm" cellspacing="0" width="100%" style="background: white;padding: 5px">
+
+                <thead>
+                    <tr>
+                        <th>Features</th> 
+                         <th>Description</th> 
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+              
+                <tbody>
+                    
+</tbody>
+</table>
+ 
+</div>
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+
+<div class="modal fade" id="addpopupModal"   aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Add Feature</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+      </div>
+       <form action="/admin/features" method="post" id="frmadd">
+       <input type="hidden" name="action"  value="add">
+      <div class="modal-body">        
+            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                             <label for="name">Name</label> 
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter Feature Name..."  required />
+                               
+                            </div>
+                             <div class="form-floating mb-3">
+                             <label for="desc">Description</label> 
+                                <textarea class="form-control" id="desc" name="desc"   placeholder="Enter Feature Name..."  required></textarea>
+                               
+                            </div>
+        <div class="alert alert-danger" style="display:none"></div>
+        <div class="alert alert-success"  style="display:none"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+                    <div class="modal fade" id="editpopupModal"   aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Edit Feature</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+      </div>
+       <form action="/admin/features" method="post" id="frmedit">
+       <input type="hidden" name="action"  value="edit">
+       <input type="hidden" name="id"  value="0">
+      <div class="modal-body">        
+            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                <label for="name">Name</label> 
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter Feature Name..."  required />
+                    
+                            </div>
+                            <div class="form-floating mb-3">
+                             <label for="desc">Description</label> 
+                                <textarea class="form-control" id="desc" name="desc"   placeholder="Enter Feature Name..."  required></textarea>
+                               
+                            </div>
+        <div class="alert alert-danger" style="display:none"></div>
+        <div class="alert alert-success"  style="display:none"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+
+        <div class="modal fade" id="deletepopupModal"   aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Delete Feature</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+      </div>
+       <form action="/admin/features" method="post" id="frmdelete">
+       <input type="hidden" name="action"  value="delete">
+       <input type="hidden" name="id"  value="0">
+      <div class="modal-body">        
+            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                  Are you sure to delete '<span class="cname"></span>'? 
+                            </div>
+        <div class="alert alert-danger" style="display:none"></div>
+        <div class="alert alert-success"  style="display:none"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="submit" class="btn btn-primary">Yes</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+
+     <script>
+   var dtable;
+    
+    function addpopup()
+    {  
+
+        $("#frmadd .alert").hide();
+  	  jQuery('#addpopupModal').modal('show');
+    }
+    $( function() {
+  	  $("#frmadd").off( "submit");
+  	   $("#frmadd").submit(function(e) {
+
+  	      e.preventDefault(); // avoid to execute the actual submit of the form.
+
+  	      var form = $(this);
+  	      var url = form.attr('action');
+  	      
+  	      $("#frmadd .alert").hide();
+  	      var data=form.serialize(); 
+  	      $.ajax({
+  	             type: "POST",
+  	             url: $(this).attr("action"),  
+  	             data:data , // serializes the form's elements.
+  	   		    dataType: "json",
+  	             success: function(data)
+  	             {
+  	   		      if(data.success)
+  	                  { $("#frmadd .alert.alert-success").html(data.message).show();  $("#frmadd")[0].reset(); loaddata();} // show response from the php script.
+  	   			  else
+  	   				  {
+  	   			     $("#frmadd .alert.alert-danger").html(data.message).show(); // show response from the php script.  
+  	   				  }
+  	   		  
+  	   		      }
+  	           });
+  	   		     }); 
+  	   $("#frmedit").off( "submit");
+  	   $("#frmedit").submit(function(e) {
+
+  	      e.preventDefault(); // avoid to execute the actual submit of the form.
+
+  	      var form = $(this);
+  	      var url = form.attr('action');
+  	      
+  	      $("#frmedit .alert").hide();
+  	      var data=form.serialize(); 
+  	      $.ajax({
+  	             type: "POST",
+  	             url: $(this).attr("action"),  
+  	             data:data , // serializes the form's elements.
+  	   		    dataType: "json",
+  	             success: function(data)
+  	             {
+  	   		      if(data.success)
+  	                  { $("#frmedit .alert.alert-success").html(data.message).show();  loaddata();} // show response from the php script.
+  	   			  else
+  	   				  {
+  	   			     $("#frmedit .alert.alert-danger").html(data.message).show(); // show response from the php script.  
+  	   				  }
+  	   		   
+  	   		      }
+  	           });
+  	   		     }); 
+  	   
+  	   $("#frmdelete").off( "submit");
+  	   $("#frmdelete").submit(function(e) {
+
+  	      e.preventDefault(); // avoid to execute the actual submit of the form.
+
+  	      var form = $(this);
+  	      var url = form.attr('action');
+  	      
+  	      $("#frmdelete .alert").hide();
+  	      var data=form.serialize(); 
+  	      $.ajax({
+  	             type: "POST",
+  	             url: $(this).attr("action"),  
+  	             data:data , // serializes the form's elements.
+  	   		    dataType: "json",
+  	             success: function(data)
+  	             {
+  	   		      if(data.success)
+  	                  { $("#frmdelete .alert.alert-success").html(data.message).show(); } // show response from the php script.
+  	   			  else
+  	   				  {
+  	   			     $("#frmdelete .alert.alert-danger").html(data.message).show(); // show response from the php script.  
+  	   				  }
+  	   		   loaddata();
+  	   		      }
+  	           });
+  	   		     }); 
+  	   loaddata();
+    });
+    
+    function loaddata()
+    { 
+    	 if(dtable!=null) $('#listtab').DataTable().clear().destroy();
+        $.ajax({
+               type: "POST",
+               url: "/admin/features",  
+               data:{action:"readall"} , // serializes the form's elements.
+     		    dataType: "json",
+               success: function(data)
+               {
+     		        if(data.success)
+     		        	{
+     		        	$("#listtab tbody").html("<h2>Loading.........</h2>");
+     		        	var strhtml=""
+     		        	data=data.data;
+     		        	  for(var i=0;i<data.length;i++)
+     		        		  {
+     		        		     strhtml+="<tr>";
+     		        		     strhtml+="<td>"+data[i].name+"</td>";
+     		        		     strhtml+="<td>"+data[i].description.substring(0, 30)+"...</td>"; 
+     		        		      strhtml+="<td><a href='#' onclick='editpopup(this)'  data-id='"+data[i].id+"' class='btn btn-info btn-sm active'><i class='mdi mdi-account-edit'></i></a>";
+     		        		     strhtml+=" <a href='#' onclick='deletepopup(this)'  data-id='"+data[i].id+"' class='btn btn-danger btn-sm active'><i class='mdi mdi-delete'></i></a></td>";
+     		        		     strhtml+="</tr>";
+     		        		  }
+     		        	$("#listtab tbody").html(strhtml); 
+     		        	dtable=$('#listtab').DataTable();  
+     		        	}
+     		      }
+             });
+    }
+    function editpopup(ele)
+    { 
+        var id=$(ele).attr("data-id");
+        
+        $.ajax({
+               type: "POST",
+               url: "/admin/features",  
+               data:{action:"read",id:id} , // serializes the form's elements.
+     		    dataType: "json",
+               success: function(data)
+               {
+     		        if(data.success)
+     		        	{
+     		        	data=data.data;
+     		        	 $("#frmedit [name=name]").val(data.name);
+     		        	 $("#frmedit [name=desc]").val(data.description);
+     		        	 $("#frmedit [name=id]").val(data.id); 
+     		             $("#frmedit .alert").hide();
+     		 	         jQuery('#editpopupModal').modal('show');
+     		        	}
+     		        else
+     		        	alert(data.message);
+     		      }
+             });
+    }
+    function deletepopup(ele)
+    { 
+        var id=$(ele).attr("data-id");
+        
+        $.ajax({
+               type: "POST",
+               url: "/admin/features",  
+               data:{action:"read",id:id} , // serializes the form's elements.
+     		    dataType: "json",
+               success: function(data)
+               {
+     		        if(data.success)
+     		        	{
+     		        	data=data.data;
+     		        	 $("#frmdelete .cname").html(data.name);
+     		        	 $("#frmdelete [name=id]").val(data.id); 
+     		             $("#frmdelete .alert").hide();
+     		 	         jQuery('#deletepopupModal').modal('show');
+     		        	}
+     		        else
+     		        	alert(data.message);
+     		      }
+             });
+    }
+</script>
+
+</body>
+</html>

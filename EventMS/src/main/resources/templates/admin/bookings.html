@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h4 class="h4 mt-4 ml-3">Bookings</h4>
+     
+</div>
+        <span   th:if="${session.message}" th:utext="${#ctx.httpSession.message}"></span>
+
+<table id="example" class="table table-striped table-hover table-bordered table-sm" cellspacing="0" width="100%" style="background: white;padding: 0 5px;">
+
+    <thead>
+        <tr>
+            <th>Package</th>
+            <th>User</th>  
+            <th>Title</th>  
+            <th>Status</th>
+            <th>Price</th>
+            <th>Paid</th>
+            <th>Date</th>
+            <th>Incharge</th>
+            <th>Date Created</th> 
+            <th>Action</th>
+        </tr>
+    </thead>
+  
+    <tbody>
+       
+        <tr  th:each="e:${bookings}">
+            <td class="special" th:utext="${e.category+'<br/>'+e.subcategory}"></td>
+            <td class="special" th:text="${e.user}"></td>
+            <td class="special" th:utext="${#strings.length(e.title)>30?#strings.substring(e.title,0, 30):e.title}"></td>
+             
+            <td class="special" th:text="${e.status}"></td>
+            
+            <td class="special amount" th:text="${e.price}"></td>
+            <td class="special amount" th:text="${e.paid}"></td>
+            <td class="special" th:text="${e.fromdate+' to '+e.todate}"></td>
+            
+            <td class="special" th:text="${e.incharge}"></td>
+            <td class="special" th:text="${e.creationtime}"></td>
+             
+            <td>
+                <a th:href="${'/admin/processbooking/'+e.id}" class="btn btn-info btn-sm active"><i class="mdi mdi-account-edit"></i></a>
+                
+           </td> 
+        </tr>
+ 
+    </tbody>
+</table>
+
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+ <script>
+  
+    $(document).ready(function() {
+        $('#example').DataTable();
+        
+    });
+
+    
+    
+</script>
+
+</body>
+</html>

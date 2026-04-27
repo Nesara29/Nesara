@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="base :: header">
+</th:block>
+<div class="container" style="width: 70%;">
+
+    <div class="row mb-3">
+        <div class="col-lg-12"> 
+            <h2 class="h2 text-uppercase text-center mb-0">Select Package</h2>
+        </div>
+         <div class="filter-control">
+      <div class="filter-list">
+        <button class="filter-btn" th:each="cat:${services}"  th:data-filter="${'cat'+cat.id}" th:text="${cat.name}"></button> 
+      </div>
+      <button class="clear-all ml-3">Clear all</button>
+      
+         </div>
+    </div>
+ 
+     <div  th:each="c:${categories}" th:class="${'row grid-item cat'+c.catid}">
+        <div class="col-md-12 p-0" style="margin-bottom: 20px;"> <!-- border:1px solid rgba(0,0,0,.125) -->
+
+            <div class="float-left">
+                <img th:src="${'/home/viewpackageimg/'+c.id}" style="width: 500px;" alt="">
+            </div>
+            
+            <div class="float-left" style="width: 47%;"> 
+                <ul class="list-group">
+                    <li class="list-group-item bg-danger active" style="padding-top: 12px;"><h6 class="h6 text-center"><span  th:text="${c.category+' - '+c.name}"></span> Package  - Price: <span class="amount" th:text="${c.price}"></span></h6></li>
+                    <li class="list-group-item  list-group-item-light "><b>THIS PACKAGE INCLUDES:</b></li>
+                    
+                                <li class="list-group-item" th:each="f:${c.features}" th:text="${f.name}"></li>
+                </ul>
+                 <div class="float-right">
+                <a th:href="${'/home/packagedetail/'+c.id}" class="btn btn-sm btn-success active" style="border-radius: 3px;margin-top: 9px;">Book Now</a>
+                <a th:href="${'/home/packagedetail/'+c.id}" class="btn btn-sm btn-primary active" style="border-radius: 3px;margin-top: 9px;">More Detail</a>
+            </div>
+            </div>
+            </div><!-- end of col-md-8 p-0 pl-3 -->
+        </div>
+ 
+
+</div><!-- end of container -->
+
+
+
+<th:block  th:replace="base :: footer">
+</th:block>
+     <style>
+        body {
+            margin-top: 6%;
+        }
+
+        .navbar-light .navbar-brand {
+            color: #1a1a1a;
+            font-weight: bold;
+            line-height: 22px;
+        }
+
+        .navbar {
+            font-weight: 700;
+            padding: 12px;
+            font-style: normal;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: black;
+            border-bottom: 1px solid #ddd;
+        }
+
+        li.nav-item > a.nav-link {
+            color: black !important;
+            font-weight: bold !important;
+        }
+
+        #review {
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+      
+        .navbar-expand-lg .navbar-nav .nav-link {
+            padding-right: .9rem;
+        }
+
+        .navbar-brand {
+            margin-left: 20px;
+            width: 200px;
+        }
+
+      
+
+        img.img-fluid.img-custom {
+            width: 344px;
+            height:230px;
+        }
+        .btn.btn-sm.btn-light.active:hover {
+            background: white;
+        }
+        .list-group-item:first-child {
+            border-top-left-radius: 0rem;
+            border-top-right-radius: 0rem;
+        }
+        .list-group-item:last-child {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .list-group-item.active{
+            border-color: #00125100;
+        }
+    </style>
+    
+<script>
+$(function(){
+$('.filter-list button').click(function() {
+    $(this).toggleClass('active');
+
+    let filterArr = $(".filter-list button.active").map(function() {
+        return $(this).data('filter');
+    });
+
+    let filterItem = $(".grid-item");
+
+    if(filterArr.length <= 0) {
+        filterItem.show();
+    } else {
+        filterItem.hide();
+        filterItem.each(function () {
+            for(let i = 0; i < filterArr.length; i++) {
+                if($(this).hasClass(filterArr[i])) {
+                    $(this).show();
+                }
+            }
+        });
+    }
+ });
+ $('.clear-all').click(function() {
+     $('.filter-list button').removeClass('active');
+     $(".grid-item").show();
+ });
+});
+</script>
+</body>
+</html>

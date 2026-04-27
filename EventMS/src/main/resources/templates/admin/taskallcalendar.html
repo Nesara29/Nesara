@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+ <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h5 class="h4 mt-4 ml-3" style="text-align: center;">Calendar Activities</h5>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="calendar"></div>
+    </div>
+</div>
+
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+   
+
+    <link href='/assets/calendar/fullcalendar.min.css' rel='stylesheet' />
+
+    <link href='/assets/calendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
+    <script src='/assets/calendar/moment.min.js'></script>
+ 
+
+    <script src='/assets/calendar/fullcalendar.min.js'></script>
+    
+       <style>
+
+          #calendar {
+            max-width:82%;
+            margin: 0px auto;
+            padding: 20px 20px;
+              background: white;
+
+          }
+
+        .fc-content {
+            background: white;
+            color: black;
+            padding:3px;
+
+        }
+
+        .fc-title {
+            text-transform: capitalize;
+        }
+        .btn-primary {
+            background-color: #17B4BC;
+            border-color: #17B4BC;
+        }
+
+          .btn-primary.disabled, .btn-primary:disabled {
+              background-color: #17B4BC;
+              border-color: #17B4BC;
+          }
+
+    </style>
+    <script>
+
+    $(document).ready(function() {
+        
+        $('#calendar').fullCalendar({
+            themeSystem: 'bootstrap4',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            // defaultDate: '2016-01-12',
+            editable: true,
+            navLinks: true, // can click day/week names to navigate views
+            weekNumbers: true,
+            eventLimit: true, // allow "more" link when too many events
+            selectable: true,
+            selectHelper: true,
+
+            select: function(start, end) {
+                $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+                $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+                $('#ModalAdd').modal('show');
+            },
+            eventRender: function(event, element) {
+                element.bind('dblclick', function() {
+                    $('#ModalEdit #id').val(event.id);
+                    $('#ModalEdit #title').val(event.title);
+                    $('#ModalEdit #location').val(event.location);
+                    $('#ModalEdit #color').val(event.color);
+                    $('#ModalEdit').modal('show');
+                });
+            },
+            
+            eventDrop: function(event, delta, revertFunc) { // si changement de position
+                edit(event);
+            },
+            eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
+                edit(event);
+            },
+            events: [
+           
+            ]
+        });
+        
+        function edit(event){
+            start = event.start.format('YYYY-MM-DD HH:mm:ss');
+            if(event.end){
+                end = event.end.format('YYYY-MM-DD HH:mm:ss');
+            }else{
+                end = start;
+            }
+            
+            id =  event.id;
+            
+            Event = [];
+            Event[0] = id;
+            Event[1] = start;
+            Event[2] = end;
+            
+            $.ajax({
+             url: 'task_editEventDate.php',
+             type: "POST",
+             data: {Event:Event},
+             success: function(rep) {
+                    if(rep === 'OK'){
+                        alert('Saved');
+                    }else{
+                        alert('Could not be saved. try again.'); 
+                    }
+                }
+            });
+        }
+        
+    });
+
+</script>
+    
+</body>
+</html>

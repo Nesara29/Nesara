@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+  <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-8 offset-2 pl-3 pb-3 box-shadow mt-4">
+            
+                <form method="post" data-return="/admin/packages" class="ajaxfrm" action="/admin/subcategories" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="add">
+
+                    <h4 class="h4 mt-4 pb-2" style="border-bottom: 1px solid #dee2e6!important;">Add New Package</h4>
+
+                     
+                    <div class="form-group">
+                        <label for="category">Package Category</label>
+                        <select class="form-control" name="category" required>
+                            <option th:each="c:${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Package Title</label>
+                        <input type="text" name="title" class="form-control" id="title"  placeholder="Enter package name" required>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="price">Price Of This Package</label>
+                        <input type="number" min=100 name="price" class="form-control" id="price"  placeholder="Enter the price"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preview_image">Features</label>
+                        <div class="row">
+                          <th:block th:each="f:${features}">
+                             <div class="col-md-4">  <input class="mr-1 mt-2" type="checkbox" name="features[]" th:value="${f.id}"><span th:text="${f.name}"></span> </div>
+                          </th:block>
+                        </div>
+                   </div>
+                   
+                    <div class="form-group">
+                        <label for="preview_image">Preview Image</label>
+                        <input type="file" name="img"  required>
+                   </div>
+                       
+                         <div class="msg msg-success text-success d-none"></div>
+                            <div class="msg msg-error text-danger d-none"></div>
+                   
+                        <button type="submit" name="submit" class="btn btn-sm btn-success float-right mr-2" style="font-size: 12px;">Save</button>
+                </form><!-- end of input form -->
+            </div>
+        </div>
+    </div>
+ 
+
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+  
+
+</body>
+</html>

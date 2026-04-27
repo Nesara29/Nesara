@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+<div class="container">
+    
+     <div class="row">
+        <div class="col-md-12 p-0" style="margin-bottom: 20px;"> <!-- border:1px solid rgba(0,0,0,.125) -->
+           
+            <div class="col-6 bg-white float-left h-100">
+                <h5 class="h5 text-uppercase mb-5 pt-3 pl-3 pr-3">
+                    <span class="float-left text-capitalize"><span th:text="${subcategory.name+' '+category.name}"></span> Package  </span>
+                    <span class="float-right text-capitalize">Price: <span class="amount" th:text="${subcategory.price}"></span></span>
+                </h5> 
+                     
+ <div class="form-group"> 
+   <span class="form-control" th:text="${booking.title}"></span>
+ </div>
+  <div class="form-group"> 
+   <span class="form-control" th:text="${booking.details}"></span>
+ </div>
+ <div class="form-group"> 
+   <span class="form-control" th:text="${booking.fromdate+' to '+booking.todate}"></span>
+ </div>
+  <div class="form-group"> 
+   <span class="form-control" th:text="${status}"></span>
+ </div> 
+ <div class="form-group"> 
+   <span class="form-control" th:text="${'Booked at '+booking.creationtime}"></span>
+ </div>
+  <div class="form-group"> 
+   <label>Booked by:</label> 
+   <div class="form-control">
+   <span   th:text="${user.getName()}"></span><br/>
+   <span   th:text="${user.mobile}"></span><br/>
+   <span  th:text="${user.email}"></span><br/>
+   </div>
+ </div>
+  </div>
+          
+ <div class="col-6 bg-white float-right h-100 pt-5">
+   <form method="post" action="/admin/bookings" class="ajaxfrm" data-return="/admin/bookings" enctype="multipart/form-data">
+  <input type="hidden" name="booking" th:value="${booking.id}">
+ <div class="form-group" > 
+    <label>Status:</label> 
+      <select class="custom-select form-control" id="status" name="status" required>  
+                              <option th:each="b:${statuses}" th:value="${b.acode}" th:text="${b.aname}" th:selected="${b.acode==booking.status}"></option>
+                        </select>
+ </div> 
+            
+  <div class="form-group" > 
+    <label>Incharge:</label> 
+    
+     <select class="custom-select form-control" id="incharge" name="incharge" required>  
+     <option value=0>NA</option>
+                              <option th:each="b:${users}" th:value="${b.id}" th:text="${b.getName()}" th:selected="${b.id==booking.incharge}"></option>
+                        </select>
+ </div>
+ 
+                         <div class="msg msg-success text-success d-none"></div>
+                            <div class="msg msg-error text-danger d-none"></div>
+                                 <button type="submit" name="submit" value="" class="btn btn-success btn-sm float-right">Update</button> 
+                              </form>
+  <br/>
+  <br/>
+  <br/>
+   <br/>
+  <br/>
+  <br/> <br/>
+  <br/>
+  <br/>
+<div class="form-group h4" th:if="${events.size()>0}"> 
+    <a href="#" onclick="eventspopup()">Click here to see list of events for this booking</a>
+ </div>
+ 
+ <div class="form-group" th:if="${booking.status>0}"> 
+    <h4>Payments:</h4><br/> 
+    <label>Paid:</label><span class="amount" th:text="${paid}"></span>
+ 
+    <table class="table">
+      <thead>
+        <tr><th>Date</th><th>Mode</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+       <tr th:each="p:${payments}">
+       <td th:text="${p.creationtime}"></td>
+       <td th:text="${p.paymentmode}"></td>
+       <td class="amount" th:text="${p.amount}"></td>
+       </tr>
+       <tr th:if="${payments.size()==0}">
+       <th colspan="3">No Records found</th>
+       </tr>
+      </tbody>
+    </table>
+ </div>
+ </div>
+ </div><!-- end of col-md-8 p-0 pl-3 -->
+            </div>
+       
+
+</div><!-- end of container -->
+
+
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+
+   
+ <div class="modal fade" id="eventsModal"   aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Events</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+      </div> 
+      <div class="modal-body">        
+       <table class="table">
+      <thead>
+        <tr><th>Title</th><th>Venue</th><th>Location</th><th>Guests</th><th>Time</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+       <tr th:each="p:${events}">
+       <td th:text="${p.title}"></td>
+       <td th:text="${p.venue}"></td> 
+       <td th:text="${p.location}"></td> 
+       <td th:text="${p.guests}"></td> 
+       <td th:text="${p.time}"></td> 
+       <td th:text="${p.status}"></td> 
+       </tr>
+       <tr th:if="${events.size()==0}">
+       <th colspan="5">No Records found</th>
+       </tr>
+      </tbody>
+    </table>
+      </div> 
+      </div>
+      </div>
+      </div>
+ 
+   
+ <script> 
+  function eventspopup()
+  {  
+ 
+	   jQuery('#eventsModal').modal('show');
+  }
+  </script>
+</body>
+</html>

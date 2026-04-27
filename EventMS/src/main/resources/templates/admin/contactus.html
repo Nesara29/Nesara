@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="admin/base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="admin/base :: header">
+</th:block>
+
+ 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h6 class="h4 mt-4 ml-3">Contact Us Submissions</h6>
+    
+</div>
+ <span   th:if="${session.message}" th:utext="${#ctx.httpSession.message}"></span>
+<table id="example" class="table table-striped table-bordered table-hover table-sm" cellspacing="0" width="100%" style="background: white;padding: 0 5px;">
+
+    <thead>
+        <tr>
+            <th>Name</th> 
+            <th>Email</th> 
+            <th>Contact</th>  
+            <th>Message</th> 
+            <th>Datetime</th> 
+        </tr>
+    </thead>
+     
+    <tbody> 
+        <tr th:each="c:${contactus}">
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.email}"></td>
+            <td th:text="${c.mobile}"></td> 
+            <td class="add-read-more show-less-content" th:text="${c.message}"></td> 
+            <td th:text="${c.creationtime}"></td>
+             
+            
+        </tr>
+ 
+</tbody>
+</table>
+
+
+
+<th:block  th:replace="admin/base :: footer">
+</th:block>
+   <script>
+  
+    $(document).ready(function() {
+        $('#example').DataTable(); 
+    });
+
+    $(document).ready(function(){
+        function AddReadMore() {
+         //This limit you can set after how much characters you want to show Read More.
+         var carLmt = 50;
+         // Text to show when text is collapsed
+         var readMoreTxt = " ...read more";
+         // Text to show when text is expanded
+         var readLessTxt = " read less";
+
+
+         //Traverse all selectors with this class and manupulate HTML part to show Read More
+         $(".add-read-more").each(function () {
+            if ($(this).find(".first-section").length)
+               return;
+
+            var allstr = $(this).text();
+            if (allstr.length > carLmt) {
+               var firstSet = allstr.substring(0, carLmt);
+               var secdHalf = allstr.substring(carLmt, allstr.length);
+               var strtoadd = firstSet + "<span class='second-section'>" + secdHalf + "</span><span class='read-more'  title='Click to Show More'>" + readMoreTxt + "</span><span class='read-less' title='Click to Show Less'>" + readLessTxt + "</span>";
+               $(this).html(strtoadd);
+            }
+         });
+
+         //Read More and Read Less Click Event binding
+         $(document).on("click", ".read-more,.read-less", function () {
+            $(this).closest(".add-read-more").toggleClass("show-less-content show-more-content");
+         });
+      }
+
+      AddReadMore();
+   });
+
+    
+</script>
+<style>
+.add-read-more.show-less-content .second-section,
+.add-read-more.show-less-content .read-less {
+   display: none;
+}
+
+.add-read-more.show-more-content .read-more {
+   display: none;
+}
+
+.add-read-more .read-more,
+.add-read-more .read-less {
+   font-weight: bold;
+   margin-left: 2px;
+   color: blue;
+   cursor: pointer;
+}
+
+.add-read-more{
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+</style>
+
+</body>
+</html>

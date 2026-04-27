@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="base :: head">
+    
+</head>
+<body>
+<th:block  th:replace="base :: header">
+</th:block>
+
+
+<div class="container">
+    
+     <div class="row">
+        <div class="col-md-12 p-0" style="margin-bottom: 20px;"> <!-- border:1px solid rgba(0,0,0,.125) -->
+           
+            <div class="col-8 bg-white mx-auto">
+                <h5 class="h5 text-uppercase mb-5 pt-3 pl-3 pr-3">
+                    <span class="float-left text-capitalize"><span th:text="${subcategory.name+' '+category.name}"></span> Package  </span>
+                    <span class="float-right text-capitalize">Price: <span class="amount" th:text="${subcategory.price}"></span></span>
+                </h5>
+                <img th:src="${'/home/viewpackageimg/'+subcategory.id}"  style="width: 700px;" alt="">
+
+                <ul class="list-group">
+                        <li class="list-group-item list-group-item-action bg-danger flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 pt-2 pb-2">FUNCTIONS AND SERVICES</h5>
+                            </div>
+                        </li> 
+                        
+                            <li th:each="f:${features}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><i class="mdi mdi-check mr-3"></i><span th:text="${f.name}"></span></h5>
+                                </div>
+                                <p class="mb-1 ml-3 text-capitalize"><span th:text="${f.description}"></span></p>
+                            </li>
+                            </ul>
+                       <a href="/home/client-login" class="btn btn-success w-50 mx-auto m-4">Login to start</a>
+                </div>
+            </div><!-- end of col-md-8 p-0 pl-3 -->
+
+            </div>
+       
+
+</div><!-- end of container -->
+
+
+
+<th:block  th:replace="base :: footer">
+</th:block>
+ 
+</body>
+</html>
