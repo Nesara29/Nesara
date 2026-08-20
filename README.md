@@ -1,25 +1,26 @@
 <div align="center">
 
-<img src="./assets/hero-banner.svg" alt="Event Management System banner" width="100%"/>
+<img src="./assets/hero-banner.svg" alt="EventMS animated banner" width="100%"/>
 
-<br/>
+<sub>🎬 Live animated banner — typewriter title reveal, radar pulses, scanning beam, and drifting particles, rendered with native SVG animation (no JS, no external CSS).</sub>
 
-<!-- Badges -->
+<br/><br/>
+
 <p>
-  <img src="https://img.shields.io/badge/Language-Java-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Language: Java"/>
-  <img src="https://img.shields.io/badge/Framework-Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Framework: Spring Boot"/>
+  <img src="https://img.shields.io/badge/Language-Java%2017-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Language: Java 17"/>
+  <img src="https://img.shields.io/badge/Framework-Spring%20Boot%203.1-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Framework: Spring Boot 3.1"/>
   <img src="https://img.shields.io/badge/Database-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="Database: MySQL"/>
-  <img src="https://img.shields.io/badge/Version-1.0.0-00D4FF?style=for-the-badge" alt="Version 1.0.0"/>
+  <img src="https://img.shields.io/badge/Version-0.0.1--SNAPSHOT-00D4FF?style=for-the-badge" alt="Version 0.0.1-SNAPSHOT"/>
   <img src="https://img.shields.io/badge/License-Educational%20Use-7F5AF0?style=for-the-badge" alt="License: Educational Use"/>
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Build-Passing-2CB67D?style=flat-square" alt="Build Passing"/>
-  <img src="https://img.shields.io/badge/PRs-Welcome-blueviolet?style=flat-square" alt="PRs Welcome"/>
-  <img src="https://img.shields.io/badge/Maintained-Yes-brightgreen?style=flat-square" alt="Maintained"/>
+  <img src="https://img.shields.io/badge/Security-Spring%20Security%20%2B%20BCrypt-red?style=flat-square" alt="Spring Security"/>
+  <img src="https://img.shields.io/badge/Roles-Admin%20%7C%20Subadmin%20%7C%20Client-blueviolet?style=flat-square" alt="Roles"/>
+  <img src="https://img.shields.io/badge/UI-SB%20Admin%202%20%2B%20Bootstrap-blue?style=flat-square" alt="UI Theme"/>
 </p>
 
-<h3>🎉 A full-stack Java + Spring Boot platform for planning, organizing, and managing events end-to-end</h3>
+<h3>🎉 A full-stack, role-based event booking & management platform built with Java and Spring Boot</h3>
 
 </div>
 
@@ -27,16 +28,16 @@
 
 ## 📖 Overview
 
-**Event Management System (EMS)** is a web-based application built with **Java, Spring Boot, Spring MVC, Thymeleaf, Spring Data JPA, and MySQL**. It gives administrators an organized, intuitive platform to create events, manage participants, maintain schedules, and monitor registrations — all through a clean web interface.
+**EventMS** is a full-stack event booking and management web application built on **Java 17, Spring Boot 3.1, Spring Security, Spring Data JPA (Hibernate), Thymeleaf, and MySQL**. It runs three distinct portals from a single codebase — a public marketing/booking site, a **Client** self-service portal, and internal **Subadmin** and **Admin** dashboards — all protected by role-based Spring Security authorization.
 
-This project follows the **MVC architecture** and demonstrates enterprise-style web application development using the Spring Boot ecosystem, making it a strong reference for anyone learning production-grade Java web development.
+Visitors can browse event categories, service packages, a photo gallery, and blog-style posts, then register and book a package. Clients manage their own bookings and payments; subadmins handle the operational side of assigned bookings; admins run the whole platform — categories, packages, content, users, and bookings end to end.
 
 <table align="center">
 <tr>
-<td align="center">🎯<br/><b>Purpose</b><br/>Simplify event planning & management</td>
-<td align="center">🏗️<br/><b>Architecture</b><br/>MVC (Model–View–Controller)</td>
+<td align="center">🏗️<br/><b>Architecture</b><br/>Spring MVC (Controller → Service/Repository → JPA)</td>
+<td align="center">🔐<br/><b>Auth</b><br/>Spring Security + BCrypt, 3 role authorities</td>
 <td align="center">🗄️<br/><b>Data Layer</b><br/>Spring Data JPA + Hibernate</td>
-<td align="center">🎨<br/><b>UI Layer</b><br/>Thymeleaf + HTML5/CSS3</td>
+<td align="center">🎨<br/><b>UI Layer</b><br/>Thymeleaf + SB Admin 2 / Bootstrap</td>
 </tr>
 </table>
 
@@ -48,34 +49,45 @@ This project follows the **MVC architecture** and demonstrates enterprise-style 
 <tr>
 <td width="33%" valign="top">
 
-### 🎉 Event Management
-- Event Creation & Management
-- Update Event Information
-- Delete Events
-- Search & View Events
+### 🌐 Public Site
+- Home, About, Pricing pages
+- Event categories & packages
+- Package detail pages
+- Photo gallery (lightbox)
+- Blog-style event posts
+- Contact-us form
+- Client sign-up / login
+- Forgot / reset password
 
 </td>
 <td width="33%" valign="top">
 
-### 👥 Participant & Registration
-- Participant Registration
-- Registration Management
-- Event Scheduling
+### 👤 Client Portal
+- Client dashboard
+- Create a new booking
+- View & track bookings
+- Booking payments
+- Edit profile
+- Change password
 
 </td>
 <td width="33%" valign="top">
 
-### 🔐 Admin & Insights
-- Administrator Dashboard
-- Secure Authentication
-- Event Reports
-- Complete CRUD Operations
+### 🛠️ Subadmin & Admin
+- Subadmin: assigned bookings, view booking, profile
+- Admin: dashboard & task calendar
+- Manage categories & features
+- Manage packages (add/edit)
+- Manage blog events (add/edit)
+- Manage gallery photos
+- Manage bookings & process booking status
+- Manage users, clients & contact-us leads
 
 </td>
 </tr>
 </table>
 
-> ⚡ Every module above is backed by a full **CRUD** implementation and a clean, MVC-driven request flow.
+> 🔑 Access is enforced by **Spring Security authorities** — `/admin/**` requires `ADMIN`, `/subadmin/**` requires `SUBADMIN`, `/client/**` requires `CLIENT`, each backed by BCrypt-hashed credentials.
 
 <img src="./assets/section-divider.svg" width="100%"/>
 
@@ -85,28 +97,28 @@ This project follows the **MVC architecture** and demonstrates enterprise-style 
 
 **Backend**
 
-<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
-<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
+<img src="https://img.shields.io/badge/Java%2017-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+<img src="https://img.shields.io/badge/Spring%20Boot%203.1-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
 <img src="https://img.shields.io/badge/Spring%20MVC-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
+<img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/>
 <img src="https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge&logo=hibernate&logoColor=white"/>
+<img src="https://img.shields.io/badge/Lombok-A50017?style=for-the-badge"/>
 
 **Frontend**
 
 <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white"/>
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+<img src="https://img.shields.io/badge/Bootstrap%204-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"/>
+<img src="https://img.shields.io/badge/SB%20Admin%202-1a1a2e?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"/>
+<img src="https://img.shields.io/badge/DataTables-1a1a2e?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Lightbox-1a1a2e?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Font%20Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white"/>
 
-**Database**
+**Database & Build**
 
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
-
-**Build & Tools**
-
 <img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
-<img src="https://img.shields.io/badge/Eclipse%20%2F%20IntelliJ-2F2F2F?style=for-the-badge&logo=intellijidea&logoColor=white"/>
 
 </div>
 
@@ -116,56 +128,51 @@ This project follows the **MVC architecture** and demonstrates enterprise-style 
 
 ```mermaid
 flowchart TD
-    A["🌐 Client Browser"] -->|"HTTP Request"| B["🎮 Spring MVC Controller"]
-    B --> C["⚙️ Service Layer<br/>(Business Logic)"]
-    C --> D["🗄️ Spring Data JPA<br/>(Hibernate)"]
-    D --> E[("🐬 MySQL Database")]
-    E --> D
-    D --> C
-    C --> B
-    B -->|"Model + View"| F["🎨 Thymeleaf Template Engine"]
-    F -->|"Rendered HTML"| A
-
-    subgraph Layer["Application Layers"]
-        B
-        C
-        D
-    end
+    A["🌐 Browser<br/>Public / Client / Subadmin / Admin"] -->|"HTTP Request"| B["🛡️ Spring Security Filter<br/>(role check: ADMIN / SUBADMIN / CLIENT)"]
+    B --> C["🎮 Controller<br/>HomeController / ClientController /<br/>SubadminController / AdminController"]
+    C --> D["⚙️ Service Layer<br/>LoginsService"]
+    C --> E["🗄️ Repository Layer<br/>Spring Data JPA"]
+    D --> E
+    E --> F[("🐬 MySQL<br/>spring_eventms")]
+    F --> E
+    E --> C
+    C -->|"Model + View"| G["🎨 Thymeleaf Templates<br/>base / admin / subadmin / client"]
+    G -->|"Rendered HTML"| A
 
     style A fill:#0f0c29,stroke:#00d4ff,color:#ffffff
-    style F fill:#0f0c29,stroke:#2cb67d,color:#ffffff
-    style E fill:#1a1440,stroke:#7f5af0,color:#ffffff
-    style Layer fill:#05050f,stroke:#7f5af0,color:#ffffff
+    style B fill:#1a1440,stroke:#ff4d6d,color:#ffffff
+    style G fill:#0f0c29,stroke:#2cb67d,color:#ffffff
+    style F fill:#1a1440,stroke:#7f5af0,color:#ffffff
 ```
 
-> 📌 The application follows a classic **MVC request lifecycle**: the browser sends a request → the controller delegates to the service layer → JPA/Hibernate talks to MySQL → Thymeleaf renders the final HTML response.
+**Request flow:** every request first passes through the **Spring Security filter chain**, which checks the URL prefix against the caller's granted authority. Controllers delegate to the service/repository layer, JPA/Hibernate talks to MySQL, and Thymeleaf renders the role-appropriate template (`templates/admin/*`, `templates/subadmin/*`, `templates/client/*`, or the public templates).
 
 <img src="./assets/section-divider.svg" width="100%"/>
 
 ## 📸 Screenshots & Demo
 
-> 🖼️ Add your actual screenshots to `docs/screenshots/` and update the paths below. Placeholders are shown until real images are added.
+> 🖼️ Add your actual screenshots to `docs/screenshots/` and update the filenames below. Placeholders are shown until real images are added.
 
 <div align="center">
 <table>
 <tr>
 <td align="center" width="50%">
-<img src="./docs/screenshots/dashboard.png" alt="Admin Dashboard — PLACEHOLDER" width="100%"/>
-<br/><b>Administrator Dashboard</b>
+<img src="./docs/screenshots/home.png" alt="Public home page — PLACEHOLDER" width="100%"/>
+<br/><b>Public Home Page</b>
 </td>
 <td align="center" width="50%">
-<img src="./docs/screenshots/event-management.png" alt="Event Management — PLACEHOLDER" width="100%"/>
-<br/><b>Event Management</b>
+<img src="./docs/screenshots/admin-dashboard.png" alt="Admin dashboard — PLACEHOLDER" width="100%"/>
+<br/><b>Admin Dashboard</b>
 </td>
 </tr>
 <tr>
 <td align="center" width="50%">
-<img src="./docs/screenshots/registration.png" alt="Registration Page — PLACEHOLDER" width="100%"/>
-<br/><b>Participant Registration</b>
+<img src="./docs/screenshots/client-dashboard.png" alt="Client dashboard — PLACEHOLDER" width="100%"/>
+<br/><b>Client Dashboard</b>
 </td>
 <td align="center" width="50%">
-<img src="./docs/screenshots/reports.png" alt="Event Reports — PLACEHOLDER" width="100%"/>
-<br/><b>Event Reports</b>
+<img src="./docs/screenshots/booking-flow.png" alt="Booking flow — PLACEHOLDER" width="100%"/>
+<br/><b>Booking Flow</b>
 </td>
 </tr>
 </table>
@@ -177,26 +184,27 @@ flowchart TD
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/EMS.git
+git clone https://github.com/YOUR_USERNAME/EventMS.git
 ```
 
 ### 2️⃣ Navigate to the Project
 ```bash
-cd EMS
+cd EventMS
 ```
 
 ### 3️⃣ Configure the Database
-Create a MySQL database, then update the connection details in:
+Create a MySQL database named `spring_eventms` (or your own name) and update:
 ```
 src/main/resources/application.properties
 ```
 
-Example configuration:
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/YOUR_DB_NAME
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/spring_eventms
 spring.datasource.username=YOUR_DB_USERNAME
 spring.datasource.password=YOUR_DB_PASSWORD
-spring.jpa.hibernate.ddl-auto=update
+
+spring.main.allow-bean-definition-overriding=true
 ```
 
 ### 4️⃣ Build the Project
@@ -208,7 +216,7 @@ mvn clean install
 ```bash
 mvn spring-boot:run
 ```
-or
+or, using the bundled Maven wrapper:
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -218,51 +226,73 @@ or
 http://localhost:8080
 ```
 
+> 👤 Login as **Client** at `/home/client-login`, as **Admin** at `/home/admin-login`. Create your first accounts directly in the database or through the sign-up flow, since no default credentials ship with the project.
+
 <img src="./assets/section-divider.svg" width="100%"/>
 
 ## 📂 Project Structure
 
 ```
-EMS/
+EventMS/
 ├── src/
 │   ├── main/
-│   │   ├── java/
-│   │   ├── resources/
-│   │   │   ├── templates/
-│   │   │   ├── static/
-│   │   │   └── application.properties
+│   │   ├── java/com/project/eventms/
+│   │   │   ├── config/                 → SpringSecurity.java
+│   │   │   ├── controller/             → HomeController, ClientController,
+│   │   │   │                             SubadminController, AdminController,
+│   │   │   │                             ImageController
+│   │   │   ├── entity/                 → Booking, Bookingevents, Bookingpayments,
+│   │   │   │                             Category, Subcategories, Client, Users,
+│   │   │   │                             Gallery, Post, Features, Guest,
+│   │   │   │                             City, State, Calendar, Contactus, Cardcheck
+│   │   │   ├── repository/             → Spring Data JPA repositories (1 per entity)
+│   │   │   ├── security/               → CustomLoginsDetailsService, userService
+│   │   │   ├── service/                → LoginsService (+ impl)
+│   │   │   ├── Bookingstatus.java      → Booked / Approved / Live / Completed / Rejected
+│   │   │   ├── Eventstatus.java        → Planned / Live / Completed / Cancelled
+│   │   │   ├── LoginTypes.java         → ADMIN / SUBADMIN / CLIENT
+│   │   │   ├── CommonFuns.java
+│   │   │   └── eventmsApplication.java → Spring Boot entry point
+│   │   └── resources/
+│   │       ├── templates/
+│   │       │   ├── admin/              → dashboard, bookings, categories, packages,
+│   │       │   │                          blogevents, users, client, photosview, etc.
+│   │       │   ├── subadmin/           → dashboard, bookings, viewbooking, myprofile
+│   │       │   ├── client/             → dashboard, bookings, bookingadd, myprofile
+│   │       │   └── *.html              → index, about, gallery, pricing,
+│   │       │                              packagedetails, posts, postdetails, contactus
+│   │       ├── static/assets/          → css, js, images, calendar, lightbox, DESIGN
+│   │       └── application.properties
 │   └── test/
-├── assets/
+├── uploads/                            → runtime image storage (galleries, posts,
+│                                          profileimgs, subcategories)
+├── assets/                             → README banners (this file's graphics)
 │   ├── hero-banner.svg
 │   ├── section-divider.svg
 │   └── footer-banner.svg
-├── docs/
-│   └── screenshots/
+├── docs/screenshots/
 ├── pom.xml
-├── mvnw
-├── mvnw.cmd
+├── mvnw / mvnw.cmd
 └── README.md
 ```
 
 <img src="./assets/section-divider.svg" width="100%"/>
 
-## 🧩 Modules / Feature Areas
+## 🧩 Domain Model & Status Flows
 
 <div align="center">
 
-| Module | Description |
+| Enum | Values |
 |---|---|
-| 🎉 Event Management | Create, update, search, view, and delete events |
-| 👥 Participant Management | Register and manage event participants |
-| 📝 Registration Management | Track and manage event registrations |
-| 📅 Event Scheduling | Maintain event dates, times, and schedules |
-| 👨‍💼 Dashboard | Central administrator control panel |
-| 📊 Reports | View event and registration reports |
-| 🔐 Authentication | Secure administrator login |
+| `LoginTypes` | `ADMIN` · `SUBADMIN` · `CLIENT` |
+| `Eventstatus` | `Planned` → `Live` → `Completed` · `Cancelled` |
+| `Bookingstatus` | `Rejected` · `Booked` → `Approved` → `Live` → `Completed` |
 
 </div>
 
-> ℹ️ **API Note:** EMS currently uses server-rendered **Spring MVC + Thymeleaf** views rather than a dedicated REST API. **REST API Support** is listed under Future Enhancements below for teams that want to expose EMS data to external clients or a mobile app.
+Core entities: `Booking`, `Bookingevents`, `Bookingpayments`, `Category`, `Subcategories`, `Subcategoryfeatures`, `Features`, `Gallery`, `Post`, `Client`, `Users`, `Guest`, `City`, `State`, `Calendar`, `Contactus`, `Cardcheck`.
+
+> ℹ️ **API Note:** EventMS is a server-rendered **Spring MVC + Thymeleaf** application (no separate REST API layer). `ImageController` streams uploaded images (galleries, posts, profile photos, subcategory images) back to the templates.
 
 <img src="./assets/section-divider.svg" width="100%"/>
 
@@ -270,15 +300,14 @@ EMS/
 
 This project demonstrates practical, hands-on experience with:
 
-- ☕ Java Programming
-- 🌱 Spring Boot Development
-- 🎮 Spring MVC
-- 🗄️ Spring Data JPA (Hibernate)
-- 🐬 MySQL Database Integration
-- 🎨 Thymeleaf Templating
-- ⚡ CRUD Operations
-- 🏗️ MVC Architecture
-- 📦 Maven Project Management
+- ☕ Java 17 & Spring Boot 3.1
+- 🎮 Spring MVC (multi-role controller design)
+- 🛡️ Spring Security with role-based authorization & BCrypt
+- 🗄️ Spring Data JPA (Hibernate) across a 17-entity domain model
+- 🐬 MySQL relational database design
+- 🎨 Thymeleaf templating across public, client, subadmin & admin layouts
+- ⚡ File upload/streaming (gallery, posts, profile, subcategory images)
+- 📦 Maven project management with the Maven Wrapper
 
 <img src="./assets/section-divider.svg" width="100%"/>
 
@@ -286,19 +315,19 @@ This project demonstrates practical, hands-on experience with:
 
 <table align="center">
 <tr>
-<td>🎟️ Online Ticket Booking</td>
-<td>📱 QR Code Event Passes</td>
-<td>📧 Email Notifications</td>
-</tr>
-<tr>
-<td>💳 Payment Gateway Integration</td>
-<td>📊 Event Analytics Dashboard</td>
-<td>📱 Mobile Application</td>
-</tr>
-<tr>
 <td>🔌 REST API Support</td>
+<td>💳 Online Payment Gateway</td>
+<td>📧 Email/SMS Notifications</td>
+</tr>
+<tr>
+<td>📊 Booking Analytics Dashboard</td>
+<td>📱 Mobile Application</td>
 <td>☁️ Cloud Deployment</td>
-<td>🧑‍🤝‍🧑 Multi-User Role Management</td>
+</tr>
+<tr>
+<td>🎟️ QR Code Event Passes</td>
+<td>🔑 OAuth2 / Social Login</td>
+<td>🧪 Automated Test Coverage</td>
 </tr>
 </table>
 
@@ -324,12 +353,10 @@ Contributions are welcome!
 
 | | |
 |---|---|
-| 🧑‍💻 **Name** | `YOUR_NAME` |
-| 🎓 **Role** | `YOUR_ROLE` (e.g., Java / Full-Stack Developer) |
-| 📧 **Email** | `YOUR_EMAIL@example.com` |
-| 💼 **LinkedIn** | [YOUR_LINKEDIN_URL](https://linkedin.com/in/YOUR_LINKEDIN_USERNAME) |
-| 🐙 **GitHub** | [@YOUR_GITHUB_USERNAME](https://github.com/YOUR_GITHUB_USERNAME) |
-| 🌐 **Portfolio** | [YOUR_PORTFOLIO_URL](https://YOUR_PORTFOLIO_URL) |
+| 🧑‍💻 **Name** | `NESARA_GOWDA` |
+| 🎓 **Role** | `Full-Stack Developer' |
+| 📧 **Email** | `nesaragowda964@gmail.com` |
+| 🐙 **GitHub** | https://github.com/nesara29 |
 
 </div>
 
@@ -337,13 +364,13 @@ Contributions are welcome!
 
 <div align="center">
 
-<a href="https://github.com/YOUR_USERNAME/EMS">
-  <img src="https://img.shields.io/badge/Repository-EMS-181717?style=for-the-badge&logo=github&logoColor=white" alt="Repository"/>
+<a href="https://github.com/YOUR_USERNAME/EventMS">
+  <img src="https://img.shields.io/badge/Repository-EventMS-181717?style=for-the-badge&logo=github&logoColor=white" alt="Repository"/>
 </a>
-<a href="https://github.com/YOUR_USERNAME/EMS/issues">
+<a href="https://github.com/YOUR_USERNAME/EventMS/issues">
   <img src="https://img.shields.io/badge/Report-Issue-red?style=for-the-badge&logo=github&logoColor=white" alt="Issues"/>
 </a>
-<a href="https://github.com/YOUR_USERNAME/EMS/fork">
+<a href="https://github.com/YOUR_USERNAME/EventMS/fork">
   <img src="https://img.shields.io/badge/Fork-Project-2CB67D?style=for-the-badge&logo=github&logoColor=white" alt="Fork"/>
 </a>
 
@@ -355,7 +382,7 @@ Contributions are welcome!
 
 This project is intended for **educational and learning purposes**. You are free to use, modify, and extend it for academic or personal projects.
 
-> 📝 Replace this section with a formal license (e.g. MIT, Apache 2.0) and add a `LICENSE` file if you plan to distribute this project publicly.
+> 📝 Replace this section with a formal license (e.g. MIT, Apache 2.0) and add a `LICENSE` file if you plan to distribute this project publicly. No `LICENSE` file currently exists in the repository.
 
 ## ⭐ Support
 
