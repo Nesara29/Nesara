@@ -122,35 +122,6 @@ flowchart TD
 
 **Request flow:** every request first passes through the **Spring Security filter chain**, which checks the URL prefix against the caller's granted authority. Controllers delegate to the service/repository layer, JPA/Hibernate talks to MySQL, and Thymeleaf renders the role-appropriate template (`templates/admin/*`, `templates/subadmin/*`, `templates/client/*`, or the public templates).
 
-## 📸 Screenshots & Demo
-
-> 🖼️ Add your actual screenshots to `docs/screenshots/` and update the filenames below.
-
-<div align="center">
-<table>
-<tr>
-<td align="center" width="50%">
-<img src="./docs/screenshots/home.png" alt="Public home page — PLACEHOLDER" width="100%"/>
-<br/><b>Public Home Page</b>
-</td>
-<td align="center" width="50%">
-<img src="./docs/screenshots/admin-dashboard.png" alt="Admin dashboard — PLACEHOLDER" width="100%"/>
-<br/><b>Admin Dashboard</b>
-</td>
-</tr>
-<tr>
-<td align="center" width="50%">
-<img src="./docs/screenshots/client-dashboard.png" alt="Client dashboard — PLACEHOLDER" width="100%"/>
-<br/><b>Client Dashboard</b>
-</td>
-<td align="center" width="50%">
-<img src="./docs/screenshots/booking-flow.png" alt="Booking flow — PLACEHOLDER" width="100%"/>
-<br/><b>Booking Flow</b>
-</td>
-</tr>
-</table>
-</div>
-
 ## 🚀 Installation & Setup
 
 ### 1️⃣ Clone the Repository
@@ -289,20 +260,6 @@ Core entities: `Booking`, `Bookingevents`, `Bookingpayments`, `Category`, `Subca
 4. 📤 Push your branch
 5. 🔁 Submit a Pull Request
 
-## 👨‍💻 Developer
-
-<div align="center">
-
-<img src="https://img.shields.io/badge/Developer-Nesara%20Gowda-7F5AF0?style=for-the-badge" alt="Developer: Nesara Gowda"/>
-
-| | |
-|---|---|
-| 🧑‍💻 **Name** | `NESARA_GOWDA` |
-| 🎓 **Role** | `Full-Stack Developer` |
-| 📧 **Email** | `nesaragowda964@gmail.com` |
-| 🐙 **GitHub** | https://github.com/nesara29 |
-
-</div>
 
 ## 🔗 Project Links
 
