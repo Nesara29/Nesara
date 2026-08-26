@@ -126,7 +126,7 @@ flowchart TD
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/EventMS.git
+git clone https://github.com/nesara29/EventMS.git
 ```
 
 ### 2️⃣ Navigate to the Project
