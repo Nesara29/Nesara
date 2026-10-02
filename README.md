@@ -20,7 +20,7 @@
   <img src="https://img.shields.io/badge/UI-SB%20Admin%202%20%2B%20Bootstrap-blue?style=flat-square" alt="UI Theme"/>
 </p>
 
-<h3>🎉 A full-stack, role-based event booking & management platform built with Java and Spring Boot</h3>
+<h3>🎉ONLINE EVENT MANAGEMENT SYSTEM</h3>
 
 </div>
 
